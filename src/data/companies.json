@@ -1,0 +1,38 @@
+[
+  {
+    "id": "cmp_1",
+    "name": "Acme Corp",
+    "domain": "acme.com",
+    "industry": "Software & Technology",
+    "employeeCount": 350,
+    "annualRevenue": 50000000,
+    "phone": "+1 555-1000",
+    "address": "100 Technology Way, San Francisco, CA",
+    "createdAt": "2026-02-01T08:00:00Z",
+    "updatedAt": "2026-07-20T12:00:00Z"
+  },
+  {
+    "id": "cmp_2",
+    "name": "TechStart Inc",
+    "domain": "techstart.io",
+    "industry": "Fintech",
+    "employeeCount": 75,
+    "annualRevenue": 10000000,
+    "phone": "+1 555-2000",
+    "address": "450 Innovation Ave, Austin, TX",
+    "createdAt": "2026-03-15T09:30:00Z",
+    "updatedAt": "2026-07-22T14:15:00Z"
+  },
+  {
+    "id": "cmp_3",
+    "name": "GlobalTech Solutions",
+    "domain": "globaltech.com",
+    "industry": "Enterprise Services",
+    "employeeCount": 1200,
+    "annualRevenue": 250000000,
+    "phone": "+1 555-3000",
+    "address": "1000 Enterprise Blvd, New York, NY",
+    "createdAt": "2026-01-10T10:00:00Z",
+    "updatedAt": "2026-07-25T17:30:00Z"
+  }
+]

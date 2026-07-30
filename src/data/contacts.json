@@ -1,0 +1,44 @@
+[
+  {
+    "id": "cnt_1",
+    "firstName": "Sarah",
+    "lastName": "Miller",
+    "email": "sarah.m@acme.com",
+    "phone": "+1 555-0192",
+    "companyName": "Acme Corp",
+    "jobTitle": "VP of Product",
+    "status": "customer",
+    "tags": ["VIP", "Enterprise"],
+    "ownerId": "usr_1",
+    "createdAt": "2026-04-12T10:00:00Z",
+    "updatedAt": "2026-07-21T15:20:00Z"
+  },
+  {
+    "id": "cnt_2",
+    "firstName": "Alex",
+    "lastName": "Johnson",
+    "email": "alex@techstart.io",
+    "phone": "+1 555-0143",
+    "companyName": "TechStart Inc",
+    "jobTitle": "CTO",
+    "status": "prospect",
+    "tags": ["Tech", "High Value"],
+    "ownerId": "usr_2",
+    "createdAt": "2026-05-18T14:30:00Z",
+    "updatedAt": "2026-07-24T09:10:00Z"
+  },
+  {
+    "id": "cnt_3",
+    "firstName": "Elena",
+    "lastName": "Rostova",
+    "email": "elena@globaltech.com",
+    "phone": "+1 555-0188",
+    "companyName": "GlobalTech",
+    "jobTitle": "Director of Ops",
+    "status": "lead",
+    "tags": ["Inbound"],
+    "ownerId": "usr_3",
+    "createdAt": "2026-06-01T11:45:00Z",
+    "updatedAt": "2026-07-26T16:00:00Z"
+  }
+]

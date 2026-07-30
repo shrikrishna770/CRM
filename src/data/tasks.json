@@ -1,0 +1,40 @@
+[
+  {
+    "id": "tsk_1",
+    "title": "Schedule product demo with Acme Corp",
+    "type": "meeting",
+    "priority": "high",
+    "status": "in_progress",
+    "dueDate": "2026-07-28T15:00:00Z",
+    "assignedTo": "usr_1",
+    "relatedContactId": "cnt_1",
+    "relatedDealId": "dl_1",
+    "createdAt": "2026-07-24T09:00:00Z",
+    "updatedAt": "2026-07-27T10:00:00Z"
+  },
+  {
+    "id": "tsk_2",
+    "title": "Send updated contract to TechStart",
+    "type": "email",
+    "priority": "urgent",
+    "status": "todo",
+    "dueDate": "2026-07-28T11:00:00Z",
+    "assignedTo": "usr_2",
+    "relatedContactId": "cnt_2",
+    "relatedDealId": "dl_2",
+    "createdAt": "2026-07-25T14:30:00Z",
+    "updatedAt": "2026-07-26T16:00:00Z"
+  },
+  {
+    "id": "tsk_3",
+    "title": "Quarterly review call with GlobalTech",
+    "type": "call",
+    "priority": "medium",
+    "status": "completed",
+    "dueDate": "2026-07-25T17:00:00Z",
+    "assignedTo": "usr_3",
+    "relatedContactId": "cnt_3",
+    "createdAt": "2026-07-20T08:00:00Z",
+    "updatedAt": "2026-07-25T18:00:00Z"
+  }
+]
