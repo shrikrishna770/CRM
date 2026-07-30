@@ -19,7 +19,7 @@ export async function writeJsonData<T>(filename: string, data: T): Promise<void>
   try {
     await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
   } catch (error) {
-    console.error(`Error writing ${filename}:`, error);
-    throw new Error(`Failed to write JSON file ${filename}`);
+    console.warn(`Warning: Failed to write JSON file ${filename} (this is normal on read-only serverless filesystems like Vercel):`, error);
+    // Do not throw error so the request can degrade gracefully in ephemeral environments
   }
 }
