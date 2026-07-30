@@ -34,7 +34,7 @@ export default function LoginPage() {
         { 
           theme: 'filled_blue', 
           size: 'large', 
-          width: '350',
+          width: '360',
           text: 'signin_with',
           shape: 'rectangular'
         }
@@ -53,6 +53,17 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    // If google script was already loaded in document, initialize immediately
+    const google = (window as any).google;
+    if (google && googleClientId) {
+      const timer = setTimeout(() => {
+        initializeGoogleSignIn();
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [googleClientId]);
 
   const handleSimulatedGoogleSubmitDirect = async (emailStr: string) => {
     if (!emailStr.trim()) return;
@@ -162,28 +173,17 @@ export default function LoginPage() {
               )}
 
               {/* Login Button Container */}
-              <div className="relative w-full h-[48px] mb-8">
+              <div className="w-full min-h-[48px] flex justify-center items-center mb-8">
                 {googleClientId ? (
-                  <>
-                    {/* The official Google button, completely transparent but occupying the top layer */}
-                    <div 
-                      id="google-signin-btn" 
-                      className="absolute inset-0 z-20 opacity-0 cursor-pointer [&_iframe]:w-full [&_iframe]:h-full [&_iframe]:cursor-pointer"
-                    ></div>
-                    
-                    {/* Visual styled button underneath */}
-                    <button 
-                      type="button"
-                      className="absolute inset-0 z-10 w-full h-full bg-[#1b55e2] hover:bg-[#1548c2] text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/35 transition-all text-center flex items-center justify-center active:scale-[0.99]"
-                    >
-                      Login
-                    </button>
-                  </>
+                  <div 
+                    id="google-signin-btn" 
+                    className="w-full flex justify-center [&_iframe]:w-full [&_iframe]:max-w-full [&_iframe]:rounded-xl"
+                  ></div>
                 ) : (
                   <button
                     type="button"
                     onClick={handleLoginClick}
-                    className="w-full h-full bg-[#1b55e2] hover:bg-[#1548c2] text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/35 transition-all text-center flex items-center justify-center active:scale-[0.99]"
+                    className="w-full h-[48px] bg-[#1b55e2] hover:bg-[#1548c2] text-white font-bold rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/35 transition-all text-center flex items-center justify-center active:scale-[0.99]"
                   >
                     Login
                   </button>
