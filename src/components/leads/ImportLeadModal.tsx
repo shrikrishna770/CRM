@@ -154,8 +154,8 @@ export function ImportLeadModal({ isOpen, onClose, onSuccess }: ImportLeadModalP
       if (res.ok) {
         setSuccessMsg(`🎉 ${resData.message}`);
         setTimeout(() => {
-          onSuccess();
           onClose();
+          onSuccess();
         }, 1200);
       } else {
         setError(resData.message || 'Failed to import leads.');
@@ -200,9 +200,13 @@ export function ImportLeadModal({ isOpen, onClose, onSuccess }: ImportLeadModalP
       const resData = await res.json();
       if (res.ok) {
         setSuccessMsg('🎉 Lead captured successfully!');
+        // Reset form fields
+        setCompanyName(''); setUserName(''); setEmail('');
+        setPhoneNumber(''); setServices(''); setRemark('');
+        setLeadStatus('New'); setFollowUpStatus('Pending');
         setTimeout(() => {
-          onSuccess();
           onClose();
+          onSuccess();
         }, 1000);
       } else {
         setError(resData.message || 'Failed to capture lead.');

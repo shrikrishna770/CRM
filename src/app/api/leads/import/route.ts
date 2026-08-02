@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-import { readJsonData, writeJsonData } from '@/lib/json-db';
-import { Lead } from '@/types';
+import { LeadService } from '@/services/leadService';
+
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   try {
@@ -23,35 +24,32 @@ export async function POST(request: Request) {
       );
     }
 
-    const existingLeads = await readJsonData<Lead[]>('leads.json');
     const now = new Date().toISOString();
+    const createdLeads = [];
 
-    const createdLeads: Lead[] = newLeads.map((item: any, index: number) => {
-      const id = `ld_${Date.now()}_${index}`;
-      return {
-        id,
+    for (const item of newLeads) {
+      const services = Array.isArray(item.services)
+        ? item.services
+        : (item.services || item['Services'] || '')
+            .split(/[,;]/)
+            .map((s: string) => s.trim())
+            .filter(Boolean);
+
+      const lead = await LeadService.createLead({
         companyName: item.companyName || item['Company Name'] || 'Unknown Company',
         userName: item.userName || item['User Name'] || 'Unknown User',
         email: item.email || item['Email'] || 'no-email@crm.com',
         phoneNumber: item.phoneNumber || item['Phone Number'] || '',
         leadStatus: item.leadStatus || item['Lead Status'] || 'New',
-        services: Array.isArray(item.services)
-          ? item.services
-          : (item.services || item['Services'] || '')
-              .split(/[,;]/)
-              .map((s: string) => s.trim())
-              .filter(Boolean),
+        services,
         leadAssignDate: item.leadAssignDate || item['Lead Assign Date'] || now.split('T')[0],
         lastFollowDate: item.lastFollowDate || item['Last Follow Date'] || now.split('T')[0],
         followUpStatus: item.followUpStatus || item['Follow Up Status'] || 'Pending',
-        remark: item.remark || item['Remark'] || item['Remarks'] || 'Imported via CSV/Excel',
-        createdAt: now,
-        updatedAt: now,
-      };
-    });
+        remark: item.remark || item['Remark'] || item['Remarks'] || 'Imported via CRM',
+      });
 
-    const updatedLeads = [...createdLeads, ...existingLeads];
-    await writeJsonData('leads.json', updatedLeads);
+      createdLeads.push(lead);
+    }
 
     return NextResponse.json({
       message: `Successfully imported ${createdLeads.length} lead(s)`,
@@ -60,7 +58,7 @@ export async function POST(request: Request) {
     });
   } catch (error: any) {
     return NextResponse.json(
-      { message: error?.message || 'Failed to import CSV/Excel leads' },
+      { message: error?.message || 'Failed to import leads' },
       { status: 500 }
     );
   }

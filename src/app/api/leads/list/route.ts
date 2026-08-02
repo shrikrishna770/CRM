@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { LeadService } from '@/services/leadService';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const leads = await LeadService.getLeads();

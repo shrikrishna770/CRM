@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { Card, Badge, Button } from '@/components/ui';
+import { Card, Badge, Button, Pagination } from '@/components/ui';
 import { DEAL_STAGES } from '@/lib/constants';
 import { Deal, DealStage } from '@/types';
 import { formatCurrency } from '@/lib/utils';
@@ -27,8 +27,11 @@ export default function DealsPage() {
   const [deals, setDeals] = useState<Deal[]>([]);
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'table' | 'kanban'>('table');
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
   const { user } = useAuth();
   const isSupport = user?.role === 'support';
+  const paginatedDeals = deals.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   useEffect(() => {
     fetchDeals();
@@ -186,7 +189,7 @@ export default function DealsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800/60">
-                {deals.map((deal) => (
+                {paginatedDeals.map((deal) => (
                   <tr key={deal.id} className="hover:bg-slate-800/30 transition-colors">
                     {/* Company Name */}
                     <td className="px-5 py-4 font-semibold text-slate-200">
@@ -257,6 +260,12 @@ export default function DealsPage() {
               </tbody>
             </table>
           </div>
+          <Pagination
+            currentPage={currentPage}
+            totalItems={deals.length}
+            itemsPerPage={ITEMS_PER_PAGE}
+            onPageChange={setCurrentPage}
+          />
         </Card>
       ) : (
         /* KANBAN BOARD VIEW */
